@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ============================================================
+     DOCUMENT METADATA
+     File Name : index.html
+     Purpose   : Personal emotional interactive page
+     Platform  : GitHub Pages compatible
+     Author    : Bala
+============================================================ -->
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Just For You...</title>
+
+  <!-- ==========================================================
+       VIEWPORT CONFIGURATION
+  ========================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ==========================================================
+       GOOGLE FONTS (HTTPS ONLY - GITHUB SAFE)
+  ========================================================== -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ==========================================================
+       GLOBAL STYLESHEET
+  ========================================================== -->
+  <style>
+
+    /* ==========================================================
+       ROOT VARIABLES
+       Design tokens for easy future tuning
+    ========================================================== */
+    :root {
+      --bg-dark: #0f0f14;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --accent: #ff5f7e;
+      --text-main: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.75);
+      --border-soft: rgba(255, 255, 255, 0.15);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition-fast: 0.3s ease;
+      --transition-slow: 0.6s ease;
+    }
+
+    /* ==========================================================
+       GLOBAL RESET
+    ========================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1a2e, #0f0f14);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ==========================================================
+       MAIN CONTAINER
+    ========================================================== */
+    .app {
+      width: 100%;
+      max-width: 720px;
+      background: var(--glass-bg);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==========================================================
+       SECTION HANDLING
+    ========================================================== */
+    section {
+      display: none;
+      animation: sectionFade 0.6s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes sectionFade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ==========================================================
+       TYPOGRAPHY
+    ========================================================== */
+    h1, h2 {
+      font-family: "Playfair Display", serif;
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    /* ==========================================================
+       BUTTONS
+    ========================================================== */
+    .btn {
+      background: linear-gradient(135deg, var(--accent), #ff829a);
+      border: none;
+      padding: 12px 26px;
+      border-radius: var(--radius-md);
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: 0 10px 25px rgba(255, 95, 126, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(255, 95, 126, 0.45);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* ==========================================================
+       OPTIONS
+    ========================================================== */
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .option:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .option.selected {
+      border-color: var(--accent);
+      color: white;
+      background: rgba(255, 95, 126, 0.12);
+    }
+
+    /* ==========================================================
+       TEXT INPUT
+    ========================================================== */
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      color: white;
+      resize: none;
+      margin-bottom: 20px;
+    }
+
+    /* ==========================================================
+       FOOTER NOTE
+    ========================================================== */
+    .note {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 12px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ==========================================================
+       APPLICATION ROOT
+  ========================================================== -->
+  <div class="app">
+
+    <!-- ========================================================
+         SECTION 1 : INTRO
+    ======================================================== -->
+    <section class="active">
+      <h1>Hey…</h1>
+      <p>
+        This isn’t a test.  
+        This isn’t pressure.  
+        This is just me trying to speak calmly.
+      </p>
+      <button class="btn" onclick="next()">Start</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 2 : MCQ 1
+    ======================================================== -->
+    <section>
+      <h2>Even now, what still feels familiar between us?</h2>
+      <div class="options">
+        <div class="option">The calm talks where we just exist together</div>
+        <div class="option">The way we understand each other without explaining</div>
+        <div class="option">The arguments that still show we care</div>
+        <div class="option">The silence when we’re tired but still here</div>
+      </div>
+      <button class="btn" disabled onclick="next()">Next</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 3 : MCQ 2
+    ======================================================== -->
+    <section>
+      <h2>When misunderstandings happen, what keeps us from giving up?</h2>
+      <div class="options">
+        <div class="option">Talking things out even when it’s hard</div>
+        <div class="option">Remembering what we survived</div>
+        <div class="option">The fear of losing each other</div>
+        <div class="option">Choosing to stay</div>
+      </div>
+      <button class="btn" disabled onclick="next()">Next</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 4 : MCQ 3
+    ======================================================== -->
+    <section>
+      <h2>What part of me causes the most misunderstandings?</h2>
+      <div class="options">
+        <div class="option">I overthink when scared</div>
+        <div class="option">I don’t explain properly</div>
+        <div class="option">I react emotionally</div>
+        <div class="option">I go silent sometimes</div>
+      </div>
+      <button class="btn" disabled onclick="next()">Next</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 5 : MCQ 4
+    ======================================================== -->
+    <section>
+      <h2>Right now, what do you feel about us?</h2>
+      <div class="options">
+        <div class="option">We’re hurt but together</div>
+        <div class="option">We’re fixing things slowly</div>
+        <div class="option">We’re confused but not done</div>
+        <div class="option">We still matter</div>
+      </div>
+      <button class="btn" disabled onclick="next()">Next</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 6 : TRUTH BOX
+    ======================================================== -->
+    <section>
+      <h2>This is what I need you to know</h2>
+
+      <p>
+        Alfiya, I am hardcoding my life to you.<br><br>
+        You are the last woman I will ever love.<br>
+        I am not the guy behind that account, Even if it was me, u would be the first person to know.,<br>
+        i wont give up on us at any cost. this is for you. im trying hard to make u feel the truth but you dont seem to believe the TRUTH<br>
+        but i want you to know that, I Love You and I will always do ❤️. I dont want you to cry over things that are not real.
+        Please, keep this between us and dont send this link to any of your friends.
+        you told me that one person knows about this and i would not care about who the person is.
+        but please, this is between YOU AND ME.<br><br>
+        <strong>3 years and 8 months of us is real.</strong><br>
+        That account is Ghost. Troubles are being caused and pain too!.
+      </p>
+
+      <button class="btn" onclick="next()">Finish</button>
+    </section>
+
+    <!-- ========================================================
+         SECTION 7 : END
+    ======================================================== -->
+    <section>
+      <h2>Thank you for reading</h2>
+      <p>
+        No forcing.  
+        No pressure.  
+        Just honesty.
+      </p>
+      <p class="note">This page will always stay the same.</p>
+    </section>
+
+  </div>
+
+  <!-- ==========================================================
+       JAVASCRIPT (GITHUB SAFE)
+  ========================================================== -->
+  <script>
+
+    let current = 0;
+    const sections = document.querySelectorAll("section");
+
+    function next() {
+      sections[current].classList.remove("active");
+      current++;
+      if (sections[current]) {
+        sections[current].classList.add("active");
+      }
+    }
+
+    document.querySelectorAll(".options").forEach(group => {
+      const btn = group.nextElementSibling;
+      group.querySelectorAll(".option").forEach(opt => {
+        opt.addEventListener("click", () => {
+          group.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+          opt.classList.add("selected");
+          btn.disabled = false;
+        });
+      });
+    });
+
+  </script>
+
+</body>
+</html>
